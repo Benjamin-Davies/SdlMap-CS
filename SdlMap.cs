@@ -9,7 +9,7 @@ namespace SdlMapCS
         private static void RunLoop(MapView view)
         {
             bool mouseDown = false;
-            bool dirty = false;
+            bool dirty = true;
             uint lastClick = 0;
             int zoomdf = 0;
 

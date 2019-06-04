@@ -1,0 +1,33 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SdlMap-CS", "SdlMap-CS.csproj", "{C57121EC-31DB-4E22-B50F-7398B5F4BE31}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SDL2-CS", "SDL2-CS\SDL2-CS.csproj", "{85480198-8711-4355-830E-72FD794AD3F6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C57121EC-31DB-4E22-B50F-7398B5F4BE31}.Debug|x86.ActiveCfg = Debug|x86
+		{C57121EC-31DB-4E22-B50F-7398B5F4BE31}.Debug|x86.Build.0 = Debug|x86
+		{C57121EC-31DB-4E22-B50F-7398B5F4BE31}.Release|x86.ActiveCfg = Release|x86
+		{C57121EC-31DB-4E22-B50F-7398B5F4BE31}.Release|x86.Build.0 = Release|x86
+		{C57121EC-31DB-4E22-B50F-7398B5F4BE31}.Debug|x64.ActiveCfg = Debug|x86
+		{C57121EC-31DB-4E22-B50F-7398B5F4BE31}.Debug|x64.Build.0 = Debug|x86
+		{C57121EC-31DB-4E22-B50F-7398B5F4BE31}.Release|x64.ActiveCfg = Release|x86
+		{C57121EC-31DB-4E22-B50F-7398B5F4BE31}.Release|x64.Build.0 = Release|x86
+		{85480198-8711-4355-830E-72FD794AD3F6}.Debug|x86.ActiveCfg = Debug|x86
+		{85480198-8711-4355-830E-72FD794AD3F6}.Debug|x86.Build.0 = Debug|x86
+		{85480198-8711-4355-830E-72FD794AD3F6}.Release|x86.ActiveCfg = Release|x86
+		{85480198-8711-4355-830E-72FD794AD3F6}.Release|x86.Build.0 = Release|x86
+		{85480198-8711-4355-830E-72FD794AD3F6}.Debug|x64.ActiveCfg = Debug|x64
+		{85480198-8711-4355-830E-72FD794AD3F6}.Debug|x64.Build.0 = Debug|x64
+		{85480198-8711-4355-830E-72FD794AD3F6}.Release|x64.ActiveCfg = Release|x64
+		{85480198-8711-4355-830E-72FD794AD3F6}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+EndGlobal
