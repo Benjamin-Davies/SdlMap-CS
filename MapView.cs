@@ -10,7 +10,7 @@ namespace SdlMapCS
         private int OffsetX, OffsetY;
         private readonly IntPtr Window;
 
-        public TileCollection Tiles;
+        public TileCollection Tiles = new TileCollection(0, 0, 0, 0, 0);
         public int Zoom;
 
         public MapView(IntPtr window, int width, int height, int zoom)
@@ -28,8 +28,8 @@ namespace SdlMapCS
                     Math.Tan(lat * Math.PI / 180)
                     + 1 / Math.Cos(lat * Math.PI / 180)
                 ) / Math.PI) / 2;
-            OffsetX = x * (Tile.TileSize << Zoom) - Width / 2;
-            OffsetY = y * (Tile.TileSize << Zoom) - Height / 2;
+            OffsetX = (int)(x * (Tile.TileSize << Zoom) - Width / 2);
+            OffsetY = (int)(y * (Tile.TileSize << Zoom) - Height / 2);
         }
 
         public void Render()

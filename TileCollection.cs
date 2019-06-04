@@ -33,10 +33,8 @@ namespace SdlMapCS
             Depth = depth;
         }
 
-        public void QueryRange(out List<Tile> l, Range r)
+        public void QueryRange(List<Tile> l, Range r)
         {
-            l = new List<Tile>();
-
             if (!r.Contains(X, Y, Depth))
                 return;
 
@@ -70,10 +68,10 @@ namespace SdlMapCS
 
     public class TileCollection
     {
-        private Quad Quad;
-        private Range Range;
+        private Quad Quad = new Quad(0, 0, 0);
+        private Range Range = new Range();
 
-        public TileDownloader Transfers;
+        public TileDownloader Transfers = new TileDownloader();
 
         public TileCollection(int minX, int minY, int maxX, int maxY, int zoom)
         {
@@ -98,10 +96,11 @@ namespace SdlMapCS
 
         public bool Work()
         {
-            bool working = Transfers.Active();
+            bool working = Transfers.Active > 0;
             Transfers.Work();
 
-            Quad.QueryRange(out var l, Range);
+            var l = new List<Tile>();
+            Quad.QueryRange(l, Range);
 
             foreach (var t in l)
             {
@@ -113,9 +112,10 @@ namespace SdlMapCS
             return working;
         }
 
-        void Render(IntPtr screen, int offsetX, int offsetY)
+        public void Render(IntPtr screen, int offsetX, int offsetY)
         {
-            Quad.QueryRange(out var l, Range);
+            var l = new List<Tile>();
+            Quad.QueryRange(l, Range);
             foreach (var t in l)
             {
                 t.Render(screen, offsetX, offsetY);
