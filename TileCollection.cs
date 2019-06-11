@@ -10,7 +10,7 @@ namespace SdlMapCS
         public bool Contains(int x, int y, int d)
         {
             if (d > Depth)
-                throw new ArgumentOutOfRangeException(nameof(d));
+                return false;
 
             int dz = Depth - d;
             return x >= MinX >> dz
@@ -69,9 +69,9 @@ namespace SdlMapCS
     public class TileCollection
     {
         private Quad Quad = new Quad(0, 0, 0);
-        private Range Range = new Range();
+        private Range Range;
 
-        public TileDownloader Transfers = new TileDownloader();
+        public TileDownloader Transfers;
 
         public TileCollection(int minX, int minY, int maxX, int maxY, int zoom)
         {
@@ -83,6 +83,7 @@ namespace SdlMapCS
                 MaxY = maxY,
                 Depth = zoom
             };
+            Transfers = new TileDownloader(Range);
         }
 
         public void SetBounds(int minX, int minY, int maxX, int maxY, int zoom)

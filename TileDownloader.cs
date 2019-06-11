@@ -13,9 +13,11 @@ namespace SdlMapCS
         private ConcurrentQueue<(Tile tile, IntPtr memory, int size)> Done
             = new ConcurrentQueue<(Tile tile, IntPtr memory, int size)>();
         private HttpClient HttpClient = new HttpClient();
+        private readonly Range Range;
 
-        public TileDownloader()
+        public TileDownloader(Range range)
         {
+            Range = range;
             HttpClient.DefaultRequestHeaders.TryAddWithoutValidation(
                 "User-Agent", "sdlmap/1.0");
         }
@@ -25,7 +27,6 @@ namespace SdlMapCS
         public void Queue(Tile tile)
         {
             Q.Enqueue(tile);
-            tile.Queue();
         }
 
         private async Task Load(Tile tile)
@@ -51,6 +52,10 @@ namespace SdlMapCS
                 if (Q.Count > 0)
                 {
                     var tile = Q.Dequeue();
+                    while (!Range.Contains(tile.X, tile.Y, tile.Zoom) && Q.Count > 0)
+                        tile = Q.Dequeue();
+
+                    tile.Queue();
                     Task.Run(() => Load(tile));
                     Active++;
                 }
