@@ -1,21 +1,17 @@
 ﻿using System;
 
-using static SDL2.SDL;
-
 namespace SdlMapCS
 {
     public class MapView
     {
         private int Width, Height;
         private int OffsetX, OffsetY;
-        private readonly IntPtr Window;
 
         public TileCollection Tiles = new TileCollection(0, 0, 0, 0, 0);
         public int Zoom;
 
-        public MapView(IntPtr window, int width, int height, int zoom)
+        public MapView(int width, int height, int zoom)
         {
-            Window = window;
             OffsetX = 0;
             OffsetY = 0;
             Zoom = zoom;
@@ -32,11 +28,9 @@ namespace SdlMapCS
             OffsetY = (int)(y * (Tile.TileSize << Zoom) - Height / 2);
         }
 
-        public void Render()
+        public void Render(IntPtr surface)
         {
-            var screen = SDL_GetWindowSurface(Window);
-            Tiles.Render(screen, OffsetX, OffsetY);
-            SDL_UpdateWindowSurface(Window);
+            Tiles.Render(surface, OffsetX, OffsetY);
         }
 
         public void MoveBy(int dx, int dy)
