@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace SdlMapCS
 {
-    public class TileDownloader
+    public class WebLoader : TileLoader
     {
         private Queue<Tile> Q = new Queue<Tile>();
         private ConcurrentQueue<(Tile tile, IntPtr memory, int size)> Done
             = new ConcurrentQueue<(Tile tile, IntPtr memory, int size)>();
         private HttpClient HttpClient = new HttpClient();
 
-        public TileDownloader()
+        public WebLoader()
         {
             HttpClient.DefaultRequestHeaders.TryAddWithoutValidation(
                 "User-Agent", "sdlmap/1.0");
