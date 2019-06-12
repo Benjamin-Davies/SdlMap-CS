@@ -6,7 +6,7 @@ namespace SdlMapCS
 {
     public static class SdlMap
     {
-        private static void RunLoop(MapView view)
+        private static void RunLoop(MapView view, IntPtr window)
         {
             bool mouseDown = false;
             bool dirty = true;
@@ -92,7 +92,10 @@ namespace SdlMapCS
                 {
                     view.UpdateBounds();
                     dirty = view.Tiles.Work();
-                    view.Render();
+
+                    var surface = SDL_GetWindowSurface(window);
+                    view.Render(surface);
+                    SDL_UpdateWindowSurface(window);
                 }
             }
         }
@@ -109,10 +112,10 @@ namespace SdlMapCS
             int zoom = 12;
             var window = SDL_CreateWindow("SDLmap", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WindowFlags.SDL_WINDOW_SHOWN | SDL_WindowFlags.SDL_WINDOW_RESIZABLE);
 
-            var view = new MapView(window, width, height, zoom);
+            var view = new MapView(width, height, zoom);
             view.CenterCoords(48.4284, -123.3656);
 
-            RunLoop(view);
+            RunLoop(view, window);
 
             return 0;
         }
