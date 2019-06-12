@@ -31,7 +31,8 @@
     <Compile Include="MapView.cs" />
     <Compile Include="TileCollection.cs" />
     <Compile Include="Tile.cs" />
-    <Compile Include="TileDownloader.cs" />
+    <Compile Include="WebLoader.cs" />
+    <Compile Include="TileLoader.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="SDL2-CS\SDL2-CS.csproj">
