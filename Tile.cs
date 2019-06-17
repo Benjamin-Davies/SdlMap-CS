@@ -36,10 +36,9 @@ namespace SdlMapCS
             State = TileState.Queued;
         }
 
-        public void Load(IntPtr memory, int size)
+        public void Load(IntPtr surface)
         {
-            var img = IMG_Load_RW(SDL_RWFromMem(memory, size), 1);
-            Surface = img;
+            Surface = surface;
             State = TileState.Loaded;
         }
 

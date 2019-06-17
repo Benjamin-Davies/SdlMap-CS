@@ -68,8 +68,9 @@ namespace SdlMapCS
 
     public class TileCollection
     {
-        public Quad Quad = new Quad(0, 0, 0);
-        public Range Range;
+        private Quad Quad = new Quad(0, 0, 0);
+        private Range Range;
+
         public TileLoader Transfers;
 
         public TileCollection(int minX, int minY, int maxX, int maxY, int zoom)

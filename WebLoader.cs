@@ -5,13 +5,16 @@ using System.Net.Http;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
+using static SDL2.SDL;
+using static SDL2.SDL_image;
+
 namespace SdlMapCS
 {
     public class WebLoader : TileLoader
     {
         private Queue<Tile> Q = new Queue<Tile>();
-        private ConcurrentQueue<(Tile tile, IntPtr memory, int size)> Done
-            = new ConcurrentQueue<(Tile tile, IntPtr memory, int size)>();
+        private ConcurrentQueue<(Tile tile, IntPtr surface)> Done
+            = new ConcurrentQueue<(Tile, IntPtr)>();
         private HttpClient HttpClient = new HttpClient();
         private readonly Range Range;
 
@@ -35,16 +38,17 @@ namespace SdlMapCS
 
             var memory = Marshal.AllocHGlobal(bytes.Length);
             Marshal.Copy(bytes, 0, memory, bytes.Length);
+            var img = IMG_Load_RW(SDL_RWFromMem(memory, bytes.Length), 1);
+            Marshal.FreeHGlobal(memory);
 
-            Done.Enqueue((tile, memory, bytes.Length));
+            Done.Enqueue((tile, img));
         }
 
         public int Work()
         {
             while (Done.TryDequeue(out var item))
             {
-                item.tile.Load(item.memory, item.size);
-                Marshal.FreeHGlobal(item.memory);
+                item.tile.Load(item.surface);
                 Active--;
             }
             if (Active <= 0)
