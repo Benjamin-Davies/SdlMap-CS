@@ -71,7 +71,7 @@ namespace SdlMapCS
         private Quad Quad = new Quad(0, 0, 0);
         private Range Range;
 
-        public TileDownloader Transfers;
+        public TileLoader Transfers;
 
         public TileCollection(int minX, int minY, int maxX, int maxY, int zoom)
         {
@@ -83,7 +83,7 @@ namespace SdlMapCS
                 MaxY = maxY,
                 Depth = zoom
             };
-            Transfers = new TileDownloader(Range);
+            Transfers = new WebLoader(Range);
         }
 
         public void SetBounds(int minX, int minY, int maxX, int maxY, int zoom)
